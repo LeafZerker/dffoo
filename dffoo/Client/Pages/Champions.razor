@@ -1,0 +1,46 @@
+﻿@page "/"
+@inject IChampService ChampService
+@inject NavigationManager NavMan
+<PageTitle>DFFOO: Champions</PageTitle>
+<h3>Champions</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Game</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var champ in ChampService.Champs)
+        {
+            var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+            var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+            <tr>
+                <td><img src= "@profile" /> @champ.ChampName </td>
+                <td><img src="@weapo"/></td>
+                <td>@champ.Game.Name</td>
+                <td class="btn btn-primary" @onclick="(() => ShowChamp(champ.Id))"><i class="oi oi-pencil"></i></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateChamp">Create a Champion</button>
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ChampService.GetChampions();
+    }
+
+    string getstring()
+    {
+        var s = "/OOPortraits/@champ.ChampName" + ".png";
+        return s;
+    }
+
+    void ShowChamp(int id) => NavMan.NavigateTo($"champion/{id}");
+
+    void CreateChamp() => NavMan.NavigateTo("/champion");
+}
