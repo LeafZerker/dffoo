@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using dffoo.Client.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,10 +15,12 @@ namespace dffoo.Server.Controllers
     {
         public static User user = new();
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost("register")]
@@ -45,6 +49,15 @@ namespace dffoo.Server.Controllers
             return Ok(token);
         }
 
+     /*   [HttpGet, Authorize]
+        public ActionResult<object> GetUser()
+        {
+            var userName = User?.Identity?.Name;
+            var userName2 = User.FindFirstValue(ClaimTypes.Name);
+            var role = User.FindFirstValue(ClaimTypes.Role);
+            return Ok(new { userName, userName2, role });
+        }
+     */
         private string CreateToken(User user)
         {
             List<Claim> claims = new()

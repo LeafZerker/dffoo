@@ -1,6 +1,7 @@
 ﻿@page "/champion"
 @page "/champion/{id:int}"
 @inject IChampService ChampService
+@attribute [Authorize(Roles = "Admin")]
 
 @if (Id == null)
 {
@@ -13,6 +14,7 @@ else
     <h3>@champ.ChampName</h3>
 
 }
+
 <table>
         <tr>Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
         <tr>Crystal: @champ.ChampCrystal</tr>
@@ -24,53 +26,59 @@ else
         <tr>mBRV: @champ.MBRV</tr>
 </table>
 <br />
-<EditForm Model="champ" OnSubmit="HandleSubmit">
-    <div>
-        <label for="ChampName">Champion Name</label>
-        <InputText id="ChampName" @bind-Value="champ.ChampName" class="form-control"></InputText>
-   </div>
-   <div>
-        <label for="series">Origin</label>
-        <InputSelect @bind-Value="champ.GameId" class="form-select">
-            @foreach (var game in ChampService.Games)
-            {
-                <option value="@game.Id">@game.Name</option>
-            }
-        </InputSelect>
-    </div>
-    <div>
-        <label for="ChampCrystal">Champion Crystal</label>
-        <InputText id="ChampCrystal" @bind-Value="champ.ChampCrystal" class="form-control"></InputText>
-    </div>
-    <div>
-        <label for="ChampType">Champion Weapon</label>
-        <InputText id="ChampType" @bind-Value="champ.ChampType" class="form-control"></InputText>
-    </div>
-    <div>
-        <label for="HP">Champion HP</label>
-        <InputNumber id="ChampType" @bind-Value="champ.HP" class="form-control"></InputNumber>
-    </div>
-    <div>
-        <label for="ATK">ATK</label>
-        <InputNumber id="ChampType" @bind-Value="champ.ATK" class="form-control"></InputNumber>
-    </div>
-    <div>
-        <label for="DEF">DEF</label>
-        <InputNumber id="ChampType" @bind-Value="champ.DEF" class="form-control"></InputNumber>
-    </div>
-    <div>
-        <label for="iBRV">iBRV</label>
-        <InputNumber id="ChampType" @bind-Value="champ.IBRV" class="form-control"></InputNumber>
-    </div>
-    <div>
-        <label for="mBRV">mBRV</label>
-        <InputNumber id="ChampType" @bind-Value="champ.MBRV" class="form-control"></InputNumber>
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">@btnText</button>
-    <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
-</EditForm>
+<AuthorizeView Roles="Admin">
+    <NotAuthorized>
 
+    </NotAuthorized>
+    <Authorized>
+        <EditForm Model="champ" OnSubmit="HandleSubmit" Context="FormCtx">
+            <div>
+                <label for="ChampName">Champion Name</label>
+                <InputText id="ChampName" @bind-Value="champ.ChampName" class="form-control"></InputText>
+           </div>
+           <div>
+                <label for="series">Origin</label>
+                <InputSelect @bind-Value="champ.GameId" class="form-select">
+                    @foreach (var game in ChampService.Games)
+                    {
+                        <option value="@game.Id">@game.Name</option>
+                    }
+                </InputSelect>
+            </div>
+            <div>
+                <label for="ChampCrystal">Champion Crystal</label>
+                <InputText id="ChampCrystal" @bind-Value="champ.ChampCrystal" class="form-control"></InputText>
+            </div>
+            <div>
+                <label for="ChampType">Champion Weapon</label>
+                <InputText id="ChampType" @bind-Value="champ.ChampType" class="form-control"></InputText>
+            </div>
+            <div>
+                <label for="HP">Champion HP</label>
+                <InputNumber id="ChampType" @bind-Value="champ.HP" class="form-control"></InputNumber>
+            </div>
+            <div>
+                <label for="ATK">ATK</label>
+                <InputNumber id="ChampType" @bind-Value="champ.ATK" class="form-control"></InputNumber>
+            </div>
+            <div>
+                <label for="DEF">DEF</label>
+                <InputNumber id="ChampType" @bind-Value="champ.DEF" class="form-control"></InputNumber>
+            </div>
+            <div>
+                <label for="iBRV">iBRV</label>
+                <InputNumber id="ChampType" @bind-Value="champ.IBRV" class="form-control"></InputNumber>
+            </div>
+            <div>
+                <label for="mBRV">mBRV</label>
+                <InputNumber id="ChampType" @bind-Value="champ.MBRV" class="form-control"></InputNumber>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">@btnText</button>
+            <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
+        </EditForm>
+    </Authorized>
+</AuthorizeView>
 @code {
     [Parameter]
     public int? Id { get; set; }
