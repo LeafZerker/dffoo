@@ -1,7 +1,12 @@
 ﻿@inject NavigationManager NavigationManager
 @inject ILocalStorageService LocalStorage
 @inject AuthenticationStateProvider AuthStateProvider
+<!--
 
+To Do: 
+- Change Login/Logout to be CSS based forms.
+
+-->
 <AuthorizeView>
     <Authorized>
         <button @onclick="Logout" class="btn btn-danger">Logout</button>

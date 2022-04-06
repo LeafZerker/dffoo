@@ -15,22 +15,21 @@ else
 
 }
 
-<table>
-        <tr>Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
-        <tr>Crystal: @champ.ChampCrystal</tr>
-        <tr class="{@champ.ChampType}">@champ.ChampType</tr>
-        <tr>HP: @champ.HP</tr>
-        <tr>ATK: @champ.ATK</tr>
-        <tr>DEF: @champ.DEF</tr>
-        <tr>iBRV: @champ.IBRV</tr>
-        <tr>mBRV: @champ.MBRV</tr>
-</table>
-<br />
-<AuthorizeView Roles="Admin">
-    <NotAuthorized>
 
-    </NotAuthorized>
+<AuthorizeView Roles="Admin">
     <Authorized>
+        <br />
+        <table>
+            <tr class="table_alert">Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
+            <tr>Crystal: @champ.ChampCrystal</tr>
+            <tr class="{@champ.ChampType}">@champ.ChampType</tr>
+            <tr>HP: @champ.HP</tr>
+            <tr>ATK: @champ.ATK</tr>
+            <tr>DEF: @champ.DEF</tr>
+            <tr>iBRV: @champ.IBRV</tr>
+            <tr>mBRV: @champ.MBRV</tr>
+        </table>
+        <br />
         <EditForm Model="champ" OnSubmit="HandleSubmit" Context="FormCtx">
             <div>
                 <label for="ChampName">Champion Name</label>
@@ -78,6 +77,20 @@ else
             <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
         </EditForm>
     </Authorized>
+    <NotAuthorized>
+        <table>
+            <tr>Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
+            <tr>Crystal: @champ.ChampCrystal</tr>
+            <tr class="{@champ.ChampType}">@champ.ChampType</tr>
+            <tr>HP: @champ.HP</tr>
+            <tr>ATK: @champ.ATK</tr>
+            <tr>DEF: @champ.DEF</tr>
+            <tr>iBRV: @champ.IBRV</tr>
+            <tr>mBRV: @champ.MBRV</tr>
+        </table>
+        <br />
+    </NotAuthorized>
+
 </AuthorizeView>
 @code {
     [Parameter]

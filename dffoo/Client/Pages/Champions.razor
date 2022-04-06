@@ -4,13 +4,12 @@
 <PageTitle>DFFOO: Champions</PageTitle>
 <h3>Champions</h3>
 
-<table class="table">
+<table class="ctable">
     <thead>
         <tr>
             <th>Name</th>
             <th>Type</th>
             <th>Game</th>
-            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -18,11 +17,10 @@
         {
             var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
             var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
-            <tr>
+            <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
                 <td><img src= "@profile" /> @champ.ChampName </td>
                 <td><img src="@weapo"/></td>
                 <td>@champ.Game.Name</td>
-                <td class="btn btn-primary" @onclick="(() => ShowChamp(champ.Id))"><i class="oi oi-pencil"></i></td>
             </tr>
         }
     </tbody>

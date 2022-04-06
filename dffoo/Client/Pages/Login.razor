@@ -1,5 +1,6 @@
 ﻿@page "/login"
 @inject HttpClient Http
+@inject NavigationManager navman
 @inject AuthenticationStateProvider AuthStateProvider
 @inject ILocalStorageService LocalStorage
 
@@ -7,7 +8,7 @@
 
 <EditForm Model="user" OnSubmit="HandleLogin">
     <label for="username">Name</label>
-    <InputText id="username" @bind-Value="user.Username" />
+    <InputText class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="username" @bind-Value="user.Username" /><p />
     <label for="password">Password</label>
     <InputText id="password" @bind-Value="user.Password" type="password" />
     <button type="submit" class="btn btn-primary">Do it!</button>
@@ -16,12 +17,17 @@
 @code {
     UserDto user = new UserDto();
 
+
     async Task HandleLogin()
     {
-        var result = await Http.PostAsJsonAsync("api/auth", user);
+        
+        var result = await Http.PostAsJsonAsync("api/auth/login", user);
         var token = await result.Content.ReadAsStringAsync();
         Console.WriteLine(token);
         await LocalStorage.SetItemAsync("token", token);
+        navman.NavigateTo("/");
         await AuthStateProvider.GetAuthenticationStateAsync();
+
     }
+
 }

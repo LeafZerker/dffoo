@@ -30,13 +30,13 @@ namespace dffoo.Server.Controllers
             user.Username = request.Username;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-
             return Ok(user);
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserDto request)
         {
+
             if(user.Username != request.Username)
             {
                 return BadRequest("User not found");
@@ -49,21 +49,12 @@ namespace dffoo.Server.Controllers
             return Ok(token);
         }
 
-     /*   [HttpGet, Authorize]
-        public ActionResult<object> GetUser()
-        {
-            var userName = User?.Identity?.Name;
-            var userName2 = User.FindFirstValue(ClaimTypes.Name);
-            var role = User.FindFirstValue(ClaimTypes.Role);
-            return Ok(new { userName, userName2, role });
-        }
-     */
         private string CreateToken(User user)
         {
             List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Role, "Admin")
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
