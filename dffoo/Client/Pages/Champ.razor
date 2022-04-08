@@ -137,7 +137,14 @@ else
 
     async Task DeleteChamp()
     {
-        await ChampService.DeleteChampion(champ.Id);
+        if (Id == null)
+        {
+            navman.NavigateTo("/");
+        }
+        else
+        {
+            await ChampService.DeleteChampion(champ.Id);
+        }
     }
 
     async Task Cancel()
