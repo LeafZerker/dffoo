@@ -12,8 +12,8 @@ using dffoo.Server.Data;
 namespace dffoo.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220408224145_azurecicd")]
-    partial class azurecicd
+    [Migration("20220408231843_sqlcerts")]
+    partial class sqlcerts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

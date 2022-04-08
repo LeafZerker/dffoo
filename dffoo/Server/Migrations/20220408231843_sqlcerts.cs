@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dffoo.Server.Migrations
 {
-    public partial class azurecicd : Migration
+    public partial class sqlcerts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
