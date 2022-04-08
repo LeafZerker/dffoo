@@ -3,10 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>20a29142-98e0-4ebe-ac80-3c3a03c24b27</ProjectGuid>
+    <ProjectGuid>639a781c-5add-41a9-9462-18be71ae6ebf</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>dffoo.client</DockerServiceName>
+    <DockerServiceName>dffoo.server</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

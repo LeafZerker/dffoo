@@ -1,17 +1,16 @@
-name: Build and deploy .NET Core app to Windows WebApp dffooClient
+name: Build and deploy .NET Core application to Web App dffooClient
 on:
   push:
     branches:
     - master
 env:
   AZURE_WEBAPP_NAME: dffooClient
-  AZURE_WEBAPP_PACKAGE_PATH: dffoo\Client/publish
-  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.dffooClient_7075 }}
+  AZURE_WEBAPP_PACKAGE_PATH: dffoo\Server\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: dffoo\Client
+  WORKING_DIRECTORY: dffoo\Server
 jobs:
-  build-and-deploy:
+  build:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,8 +30,8 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.dffooClient_FFFF }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
     - name: Publish Artifacts
       uses: actions/upload-artifact@v1.0.0
       with:

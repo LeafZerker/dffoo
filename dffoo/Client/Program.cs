@@ -1,8 +1,8 @@
-global using Microsoft.AspNetCore.Components.Authorization;
-global using Microsoft.AspNetCore.Authorization;
+global using Blazored.LocalStorage;
 global using dffoo.Client.Services.ChampionsService;
 global using dffoo.Shared;
-global using Blazored.LocalStorage;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Components.Authorization;
 using dffoo.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

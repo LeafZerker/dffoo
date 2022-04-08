@@ -39,7 +39,7 @@ namespace dffoo.Client.Services.ChampionsService
         public async Task GetChampions()
         {
             var result = await _http.GetFromJsonAsync<List<Champion>>("api/champion");
-            if(result != null)
+            if (result != null)
                 Champs = result;
         }
 

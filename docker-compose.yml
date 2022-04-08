@@ -1,15 +1,8 @@
 version: '3.4'
 
 services:
-  dffoo.client:
-    image: ${DOCKER_REGISTRY-}dffooclient
-    build:
-      context: .
-      dockerfile: dffoo/Client/Dockerfile
-
   dffoo.server:
     image: ${DOCKER_REGISTRY-}dffooserver
     build:
       context: .
       dockerfile: dffoo/Server/Dockerfile
-
