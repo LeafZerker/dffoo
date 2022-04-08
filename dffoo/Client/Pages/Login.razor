@@ -4,30 +4,55 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @inject ILocalStorageService LocalStorage
 
-<h3>Login</h3>
 
-<EditForm Model="user" OnSubmit="HandleLogin">
-    <label for="username">Name</label>
-    <InputText class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="username" @bind-Value="user.Username" /><p />
+<div class="container-fluid ">
+    <h3>Login</h3>
+<EditForm Model="user" class="form-control" OnSubmit="HandleLogin">
+    <!-- <h3 >Login</h3> -->
+    <label class="form-text" for="username">Name</label>
+    <InputText class="validate[required,custom[onlyLetter],length[0,100]] feedback-input form-text" id="username" @bind-Value="user.Username" /><p />
     <label for="password">Password</label>
-    <InputText id="password" @bind-Value="user.Password" type="password" />
-    <button type="submit" class="btn btn-primary">Do it!</button>
+    <InputText id="password" @bind-Value="user.Password" type="password" autocomplete=current-password/><p/>
+    <button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
+    <h3>Sign Up</h3>
+<EditForm Model="user" class="form-control" OnSubmit="HandleRegister">
 
+    <label for="username">Name</label>
+    <InputText class="validate[required,length[6,300]]" id="new-username" @bind-Value="user.Username"/><p/>
+    <label for="password">Password</label>
+    <InputText class="validate[required,length[6,300]]" id="new-password" @bind-Value="user.Password" type="password" /><p/>
+    <label for="password">Name</label>
+    <InputText class="validate[required,length[6,300]]" id="new-email" @bind-Value="user.Email"/><p/>
+    <label for="birthday">Birthday</label>
+    <InputDate id="birthday" @bind-Value="user.Birthday"/><p/>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+</EditForm>
+</div>
 @code {
     UserDto user = new UserDto();
 
 
     async Task HandleLogin()
     {
-        
+
         var result = await Http.PostAsJsonAsync("api/auth/login", user);
         var token = await result.Content.ReadAsStringAsync();
         Console.WriteLine(token);
         await LocalStorage.SetItemAsync("token", token);
-        navman.NavigateTo("/");
         await AuthStateProvider.GetAuthenticationStateAsync();
+        navman.NavigateTo("/");
 
+    }
+
+    async Task HandleRegister()
+    {
+        var result = await Http.PostAsJsonAsync("api/auth/register", user);
+        var token = await result.Content.ReadAsStringAsync();
+        Console.WriteLine(token);
+        await LocalStorage.SetItemAsync("token", token);
+        await AuthStateProvider.GetAuthenticationStateAsync();
+        await HandleLogin();
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿@page "/champion"
 @page "/champion/{id:int}"
 @inject IChampService ChampService
+@inject NavigationManager navman
 @attribute [Authorize(Roles = "Admin")]
 
 @if (Id == null)
@@ -75,6 +76,7 @@ else
             <br />
             <button type="submit" class="btn btn-primary">@btnText</button>
             <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
+            <button type="button" class="btn btn-warning" @onclick="Cancel">Cancel</button>
         </EditForm>
     </Authorized>
     <NotAuthorized>
@@ -125,7 +127,7 @@ else
         if(Id == null)
         {
             await ChampService.CreateChampion(champ);
-            
+
         }
         else
         {
@@ -136,6 +138,11 @@ else
     async Task DeleteChamp()
     {
         await ChampService.DeleteChampion(champ.Id);
+    }
+
+    async Task Cancel()
+    {
+        navman.NavigateTo("/");
     }
 
 }

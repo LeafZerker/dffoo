@@ -145,9 +145,12 @@
                     GameId = 17,
                 }
             );
+
         }
 
         public DbSet<Champion> Champions { get; set; }
         public DbSet<Game> Games { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

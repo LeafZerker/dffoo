@@ -2,30 +2,71 @@
 @inject IChampService ChampService
 @inject NavigationManager NavMan
 <PageTitle>DFFOO: Champions</PageTitle>
-<h3>Champions</h3>
+<AuthorizeView>
+    <NotAuthorized>
+        <h3>Champions</h3>
 
-<table class="ctable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Game</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var champ in ChampService.Champs)
-        {
-            var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
-            var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
-            <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
-                <td><img src= "@profile" /> @champ.ChampName </td>
-                <td><img src="@weapo"/></td>
-                <td>@champ.Game.Name</td>
-            </tr>
-        }
-    </tbody>
-</table>
-<button class="btn btn-primary" @onclick="CreateChamp">Create a Champion</button>
+        <table class="ctable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Crystal</th>
+                    <th>Level</th>
+                    <th>Game</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var champ in ChampService.Champs)
+                {
+                    var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                    var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                    var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                    <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
+                        <td><img src= "@profile" /> @champ.ChampName </td>
+                        <td><img src="@weapo"/></td>
+                        <td><img src="@cryst" /></td>
+                        <td>@champ.ChampClevel</td>
+                        <td>@champ.Game.Name</td>
+                    </tr>
+                }
+        
+            </tbody>
+        </table>
+    </NotAuthorized>
+    <Authorized>
+        <h3>Champions</h3>
+
+ <table class="ctable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Crystal</th>
+                    <th>Level</th>
+                    <th>Game</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var champ in ChampService.Champs)
+                {
+                    var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                    var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                    var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                    <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
+                        <td><img src= "@profile" /> @champ.ChampName </td>
+                        <td><img src="@weapo"/></td>
+                        <td><img src="@cryst" /></td>
+                        <td>@champ.ChampClevel</td>
+                        <td>@champ.Game.Name</td>
+                    </tr>
+                }
+        
+            </tbody>
+        </table><br />
+        <button class="btn btn-primary" @onclick="CreateChamp">Create a Champion</button>
+    </Authorized>
+</AuthorizeView>
 @code {
     protected override async Task OnInitializedAsync()
     {
