@@ -218,7 +218,7 @@ namespace dffoo.Server.Migrations
                     { 37, 3640, false, false, 80, "White", "Vincent", "A", "B", "C", "Gun", 4616, true, true, 7, true, true, true, true, true, 13255, 4339, true, 10474, false, null, false, true, true },
                     { 38, 3640, false, false, 80, "Black", "Prishe", "A", "B", "C", "Fist", 4616, true, true, 11, true, true, false, true, true, 13255, 4339, false, 10474, false, null, false, true, true },
                     { 39, 3640, false, false, 80, "Blue", "Faris", "A", "B", "C", "Dagger", 4616, true, true, 5, true, true, true, true, true, 13255, 4339, true, 10474, false, null, false, true, true },
-                    { 40, 3640, true, true, 90, "Yellow", "Razma", "A", "B", "C", "Sword", 4616, true, true, 19, true, true, true, true, true, 13255, 4339, true, 10474, false, null, false, true, true },
+                    { 40, 3640, true, true, 90, "Yellow", "Ramza", "A", "B", "C", "Sword", 4616, true, true, 19, true, true, true, true, true, 13255, 4339, true, 10474, false, null, false, true, true },
                     { 41, 3640, true, true, 80, "Yellow", "Ace", "A", "B", "C", "Shuriken", 4616, true, true, 17, true, true, true, true, true, 13255, 4339, true, 10474, false, null, false, true, true },
                     { 42, 3640, false, false, 80, "White", "Seymour", "A", "B", "C", "Staff", 4616, true, true, 10, true, true, true, true, true, 13255, 4339, false, 10474, false, null, false, true, true }
                 });

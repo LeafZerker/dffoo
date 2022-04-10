@@ -5,36 +5,39 @@
 <AuthorizeView>
     <NotAuthorized>
         <h3>Champions</h3>
-
+        <h5>Stats represent Champion at highest Crystal Strength and Champion level, with maxed training and summon boards, and all available equipment passives.</h5>
+        <section> 
         <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="text-white" scope="col">#</th>
-                    <th class="text-white" scope="col">Name</th>
-                    <th class="text-white" scope="col">Type</th>
-                    <th class="text-white" scope="col">Crystal</th>
-                    <th class="text-white" scope="col">Level</th>
-                    <th class="text-white" scope="col">Game</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var champ in ChampService.Champs)
-                {
-                    var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
-                    var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
-                    var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
-                    <tr class="row" @onclick="(() => ShowChamp(champ.Id))">
-                        <th>@champ.Id</th>
-                        <td class="text-white" ><img src= "@profile" /> @champ.ChampName </td>
-                        <td class="text-white" ><img src="@weapo"/></td>
-                        <td class="text-white" ><img src="@cryst" /></td>
-                        <td class="text-white" >@champ.ChampClevel</td>
-                        <td class="text-white" >@champ.Game?.Name</td>
-                    </tr>
-                }
+                    <thead>
+                
+                        <tr>
+                            <th class="text-white" scope="col">#</th>
+                            <th class="text-white" scope="col">Name</th>
+                            <th class="text-white" scope="col">Type</th>
+                            <th class="text-white" scope="col">Crystal</th>
+                            <th class="text-white" scope="col">Level</th>
+                            <th class="text-white" scope="col">Game</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var champ in ChampService.Champs)
+                        {
+                            var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                            var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                            var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                            <tr class="cham" scope="row" @onclick="(() => ShowChamp(champ.Id))">
+                                <td class="text-white">@champ.Id</td>
+                                <td class="text-white" ><img src= "@profile" /> @champ.ChampName </td>
+                                <td class="text-white" ><img src="@weapo"/></td>
+                                <td class="text-white" ><img src="@cryst" /></td>
+                                <td class="text-white" >@champ.ChampClevel</td>
+                                <td class="text-white" >@champ.Game?.Name</td>
+                            </tr>
+                        }
         
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+                </section>
     </NotAuthorized>
     <Authorized>
         <h3>Champions</h3>

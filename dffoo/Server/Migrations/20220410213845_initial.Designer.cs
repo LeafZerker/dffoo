@@ -12,7 +12,7 @@ using dffoo.Server.Data;
 namespace dffoo.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220410112322_initial")]
+    [Migration("20220410213845_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1476,7 +1476,7 @@ namespace dffoo.Server.Migrations
                             BTplus = true,
                             ChampClevel = 90,
                             ChampCrystal = "Yellow",
-                            ChampName = "Razma",
+                            ChampName = "Ramza",
                             ChampSphere1 = "A",
                             ChampSphere2 = "B",
                             ChampSphere3 = "C",
