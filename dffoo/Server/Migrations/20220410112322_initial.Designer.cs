@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dffoo.Server.Data;
 
@@ -11,9 +12,10 @@ using dffoo.Server.Data;
 namespace dffoo.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220410112322_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1474,7 +1476,7 @@ namespace dffoo.Server.Migrations
                             BTplus = true,
                             ChampClevel = 90,
                             ChampCrystal = "Yellow",
-                            ChampName = "Ramza",
+                            ChampName = "Razma",
                             ChampSphere1 = "A",
                             ChampSphere2 = "B",
                             ChampSphere3 = "C",

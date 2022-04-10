@@ -6,14 +6,15 @@
     <NotAuthorized>
         <h3>Champions</h3>
 
-        <table class="ctable">
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Crystal</th>
-                    <th>Level</th>
-                    <th>Game</th>
+                    <th class="text-white" scope="col">#</th>
+                    <th class="text-white" scope="col">Name</th>
+                    <th class="text-white" scope="col">Type</th>
+                    <th class="text-white" scope="col">Crystal</th>
+                    <th class="text-white" scope="col">Level</th>
+                    <th class="text-white" scope="col">Game</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,12 +23,13 @@
                     var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
                     var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
                     var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
-                    <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
-                        <td><img src= "@profile" /> @champ.ChampName </td>
-                        <td><img src="@weapo"/></td>
-                        <td><img src="@cryst" /></td>
-                        <td>@champ.ChampClevel</td>
-                        <td>@champ.Game.Name</td>
+                    <tr class="row" @onclick="(() => ShowChamp(champ.Id))">
+                        <th>@champ.Id</th>
+                        <td class="text-white" ><img src= "@profile" /> @champ.ChampName </td>
+                        <td class="text-white" ><img src="@weapo"/></td>
+                        <td class="text-white" ><img src="@cryst" /></td>
+                        <td class="text-white" >@champ.ChampClevel</td>
+                        <td class="text-white" >@champ.Game?.Name</td>
                     </tr>
                 }
         
@@ -36,34 +38,40 @@
     </NotAuthorized>
     <Authorized>
         <h3>Champions</h3>
-
- <table class="ctable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Crystal</th>
-                    <th>Level</th>
-                    <th>Game</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var champ in ChampService.Champs)
-                {
-                    var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
-                    var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
-                    var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
-                    <tr class="cham" @onclick="(() => ShowChamp(champ.Id))">
-                        <td><img src= "@profile" /> @champ.ChampName </td>
-                        <td><img src="@weapo"/></td>
-                        <td><img src="@cryst" /></td>
-                        <td>@champ.ChampClevel</td>
-                        <td>@champ.Game.Name</td>
-                    </tr>
-                }
+        <h5>Stats represent Champion at highest Crystal Strength and Champion level, with maxed training and summon boards, and all available equipment passives.</h5>
+        <section> 
+        <table class="table table-hover">
+                    <thead>
+                
+                        <tr>
+                            <th class="text-white" scope="col">#</th>
+                            <th class="text-white" scope="col">Name</th>
+                            <th class="text-white" scope="col">Type</th>
+                            <th class="text-white" scope="col">Crystal</th>
+                            <th class="text-white" scope="col">Level</th>
+                            <th class="text-white" scope="col">Game</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var champ in ChampService.Champs)
+                        {
+                            var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                            var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                            var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                            <tr class="cham" scope="row" @onclick="(() => ShowChamp(champ.Id))">
+                                <td class="text-white">@champ.Id</td>
+                                <td class="text-white" ><img src= "@profile" /> @champ.ChampName </td>
+                                <td class="text-white" ><img src="@weapo"/></td>
+                                <td class="text-white" ><img src="@cryst" /></td>
+                                <td class="text-white" >@champ.ChampClevel</td>
+                                <td class="text-white" >@champ.Game?.Name</td>
+                            </tr>
+                        }
         
-            </tbody>
-        </table><br />
+                    </tbody>
+                </table>
+                </section>
+                <br />
         <button class="btn btn-primary" @onclick="CreateChamp">Create a Champion</button>
     </Authorized>
 </AuthorizeView>
@@ -71,12 +79,6 @@
     protected override async Task OnInitializedAsync()
     {
         await ChampService.GetChampions();
-    }
-
-    string getstring()
-    {
-        var s = "/OOPortraits/@champ.ChampName" + ".png";
-        return s;
     }
 
     void ShowChamp(int id) => NavMan.NavigateTo($"champion/{id}");

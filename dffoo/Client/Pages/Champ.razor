@@ -19,77 +19,198 @@ else
 
 <AuthorizeView Roles="Admin">
     <Authorized>
-        <br />
-        <table>
-            <tr class="table_alert">Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
-            <tr>Crystal: @champ.ChampCrystal</tr>
-            <tr class="{@champ.ChampType}">@champ.ChampType</tr>
-            <tr>HP: @champ.HP</tr>
-            <tr>ATK: @champ.ATK</tr>
-            <tr>DEF: @champ.DEF</tr>
-            <tr>iBRV: @champ.IBRV</tr>
-            <tr>mBRV: @champ.MBRV</tr>
-        </table>
-        <br />
-        <EditForm Model="champ" OnSubmit="HandleSubmit" Context="FormCtx">
-            <div>
-                <label for="ChampName">Champion Name</label>
-                <InputText id="ChampName" @bind-Value="champ.ChampName" class="form-control"></InputText>
-           </div>
-           <div>
-                <label for="series">Origin</label>
-                <InputSelect @bind-Value="champ.GameId" class="form-select">
-                    @foreach (var game in ChampService.Games)
-                    {
-                        <option value="@game.Id">@game.Name</option>
-                    }
-                </InputSelect>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="col">
+                        <br />
+                        <table class="table table-striped">
+                            @{
+                                var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                                var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                                var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                                var sphere1 = "/OOIcons/Sphere" + $"{@champ.ChampSphere1.ToUpper()}" + ".png";
+                                var sphere2 = "/OOIcons/Sphere" + $"{@champ.ChampSphere2.ToUpper()}" + ".png";
+                                var sphere3 = "/OOIcons/Sphere" + $"{@champ.ChampSphere3.ToUpper()}" + ".png";
+                            }
+                            <tr class="text-white" scope="row"><img src="@profile" /><img src="@cryst" /><img src="@weapo" /></tr>
+                            <tr class="text-white" scope="row">HP: @champ.HP</tr>
+                            <tr class="text-white" scope="row">ATK: @champ.ATK</tr>
+                            <tr class="text-white" scope="row">DEF: @champ.DEF</tr>
+                            <tr class="text-white" scope="row">iBRV: @champ.IBRV</tr>
+                            <tr class="text-white" scope="row">mBRV: @champ.MBRV</tr>
+                            
+                        </table>
+                        <div class="row">
+                            <th class="text-white" scope="row"><p>Spheres</p></th> 
+                            <tr scope="row"><img src="@sphere1" /><img src="@sphere2" /><img src="@sphere3" /> </tr>
+                        </div>
+                        <br />
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <th>Weapons</th>
+                    </div>
+                    <div class="row">
+                        <div class="col">4*</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">15CP</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">35CP</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">EX</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">EX+</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">LD</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">BT</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">BT+</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="ChampCrystal">Champion Crystal</label>
-                <InputText id="ChampCrystal" @bind-Value="champ.ChampCrystal" class="form-control"></InputText>
+            <div class="row row-col-3">
+                <div class="row"> </div>
+                <div class="row">
+                <EditForm Model="champ" OnSubmit="HandleSubmit" Context="FormCtx">
+                            <div>
+                                <label for="ChampName">Champion Name</label>
+                                <InputText id="ChampName" @bind-Value="champ.ChampName" class="form-control"></InputText>
+                           </div>
+                           <div>
+                                <label for="series">Origin</label>
+                                <InputSelect @bind-Value="champ.GameId" class="form-select">
+                                    @foreach (var game in ChampService.Games)
+                                    {
+                                        <option value="@game.Id">@game.Name</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div>
+                                <label for="ChampCrystal">Champion Crystal</label>
+                                <InputText id="ChampCrystal" @bind-Value="champ.ChampCrystal" class="form-control"></InputText>
+                            </div>
+                            <div>
+                                <label for="ChampType">Champion Weapon</label>
+                                <InputText id="ChampType" @bind-Value="champ.ChampType" class="form-control"></InputText>
+                            </div>
+                            <div>
+                                <label for="HP">Champion HP</label>
+                                <InputNumber id="ChampType" @bind-Value="champ.HP" class="form-control"></InputNumber>
+                            </div>
+                            <div>
+                                <label for="ATK">ATK</label>
+                                <InputNumber id="ChampType" @bind-Value="champ.ATK" class="form-control"></InputNumber>
+                            </div>
+                            <div>
+                                <label for="DEF">DEF</label>
+                                <InputNumber id="ChampType" @bind-Value="champ.DEF" class="form-control"></InputNumber>
+                            </div>
+                            <div>
+                                <label for="iBRV">iBRV</label>
+                                <InputNumber id="ChampType" @bind-Value="champ.IBRV" class="form-control"></InputNumber>
+                            </div>
+                            <div>
+                                <label for="mBRV">mBRV</label>
+                                <InputNumber id="ChampType" @bind-Value="champ.MBRV" class="form-control"></InputNumber>
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-primary">@btnText</button>
+                            <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
+                            <button type="button" class="btn btn-warning" @onclick="Cancel">Cancel</button>
+                        </EditForm>
+                        </div>
+                        <div class="row"> </div>
             </div>
-            <div>
-                <label for="ChampType">Champion Weapon</label>
-                <InputText id="ChampType" @bind-Value="champ.ChampType" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="HP">Champion HP</label>
-                <InputNumber id="ChampType" @bind-Value="champ.HP" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="ATK">ATK</label>
-                <InputNumber id="ChampType" @bind-Value="champ.ATK" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="DEF">DEF</label>
-                <InputNumber id="ChampType" @bind-Value="champ.DEF" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="iBRV">iBRV</label>
-                <InputNumber id="ChampType" @bind-Value="champ.IBRV" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="mBRV">mBRV</label>
-                <InputNumber id="ChampType" @bind-Value="champ.MBRV" class="form-control"></InputNumber>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-primary">@btnText</button>
-            <button type="button" class="btn btn-danger" @onclick="DeleteChamp">Delete Champion</button>
-            <button type="button" class="btn btn-warning" @onclick="Cancel">Cancel</button>
-        </EditForm>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <table>
-            <tr>Stats represent Champion at highest Crystal Strength and Champion level, with maxed boards and equipment passives.</tr>
-            <tr>Crystal: @champ.ChampCrystal</tr>
-            <tr class="{@champ.ChampType}">@champ.ChampType</tr>
-            <tr>HP: @champ.HP</tr>
-            <tr>ATK: @champ.ATK</tr>
-            <tr>DEF: @champ.DEF</tr>
-            <tr>iBRV: @champ.IBRV</tr>
-            <tr>mBRV: @champ.MBRV</tr>
-        </table>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="col">
+                        <br />
+                        <table class="table table-striped">
+                            @{
+                                var profile = $"/OOPortraits/{@champ.ChampName}" + ".png";
+                                var weapo = $"/OOIcons/{@champ.ChampType.ToLower()}" + ".png";
+                                var cryst = $"/OOIcons/{@champ.ChampCrystal.ToLower()}" + "crystal.png";
+                                var sphere1 = "/OOIcons/Sphere" + $"{@champ.ChampSphere1.ToUpper()}" + ".png";
+                                var sphere2 = "/OOIcons/Sphere" + $"{@champ.ChampSphere2.ToUpper()}" + ".png";
+                                var sphere3 = "/OOIcons/Sphere" + $"{@champ.ChampSphere3.ToUpper()}" + ".png";
+                            }
+                            <tr class="text-white" scope="row"><img src="@profile" /><img src="@cryst" /><img src="@weapo" /></tr>
+                            <tr class="text-white" scope="row">HP: @champ.HP</tr>
+                            <tr class="text-white" scope="row">ATK: @champ.ATK</tr>
+                            <tr class="text-white" scope="row">DEF: @champ.DEF</tr>
+                            <tr class="text-white" scope="row">iBRV: @champ.IBRV</tr>
+                            <tr class="text-white" scope="row">mBRV: @champ.MBRV</tr> 
+                        </table>
+                        <div class="row">
+                            <th class="text-white" scope="row"><p>Spheres</p></th> 
+                            <tr scope="row"><img src="@sphere1" /><img src="@sphere2" /><img src="@sphere3" /> </tr>
+                        </div>
+                     
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <th>Weapons</th>
+                    </div>
+                    <div class="row">
+                        <div class="col">4*</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">15CP</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">35CP</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">EX</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">EX+</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">LD</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">BT</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">BT+</div>
+                        <div class="col">TEXT</div>
+                    </div>
+                </div>
+            </div>
+            </div>
         <br />
     </NotAuthorized>
 

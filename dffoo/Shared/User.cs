@@ -13,6 +13,6 @@ namespace dffoo.Shared
         public string Name { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; } = new byte[32];
         public byte[] PasswordSalt { get; set; } = new byte[32];
-        public DateTime birthday { get; set; } = DateTime.Today;
+        public DateTime Birthday { get; set; } = DateTime.Today;
     }
 }

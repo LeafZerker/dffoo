@@ -10,7 +10,9 @@ namespace dffoo.Shared
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string colour { get; set; } = string.Empty;
+        public string Letter { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int ChampionId { get; set; }
 
     }
 }
